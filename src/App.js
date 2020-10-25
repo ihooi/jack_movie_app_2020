@@ -8,11 +8,11 @@ class App extends React.Component {
 
 //숫자 늘리고 줄이는 함수
 add = () => {
-  console.log('add')
+  this.setState(current => ({count: current.count +1}));
 };
 
 minus = () => {
-  console.log('minus')
+  this.setState(current => ({count: current.count -1}));
 };
 
 //렌더
