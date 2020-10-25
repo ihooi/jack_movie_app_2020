@@ -1,48 +1,21 @@
 import React from 'react';
 
 class App extends React.Component {
-// 생명주기 이해하기
-  constructor(props) {
-    super(props);
-    console.log('hello');
-  }
-
-  componentDidMount(){
-    console.log('component rendered');
-  }
-
-  componentDidUpdate(){
-    console.log('I just updated');
-  }
-
-  componentWillUnmount(){
-    console.log('Goodbye, cruel world');
-  }
-
-//state 정의
   state = {
-    count: 0,
+    isLoading: true,
+    movies: [],
+  };
+
+// 렌더 이후 이걸 호출해서 타임아웃 함수를 써서 isLoading을 false로 바꿔.. 언제? 3초뒤에
+  componentDidMount() {
+    setTimeout(() =>{
+      this.setState({isLoading: false});
+    }, 3000);
   }
 
-//숫자 늘리고 줄이는 함수
-add = () => {
-  this.setState(current => ({count: current.count +1}));
-};
-
-minus = () => {
-  this.setState(current => ({count: current.count -1}));
-};
-
-//렌더
   render() {
-    console.log('rendering')
-    return (
-      <div>
-        <h1>The number is: {this.state.count}</h1>
-        <button onClick={this.add}>add</button>
-        <button onClick={this.minus}>minus</button>
-      </div>
-    )
+    const { isLoading } = this.state;
+    return <div>{isLoading ? 'Loading...' : 'We are ready'}</div>;
   }
 }
 
