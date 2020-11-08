@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 
 class App extends React.Component {
   state = {
@@ -6,11 +7,18 @@ class App extends React.Component {
     movies: [],
   };
 
-// 렌더 이후 이걸 호출해서 타임아웃 함수를 써서 isLoading을 false로 바꿔.. 언제? 3초뒤에
-  componentDidMount() {
-    setTimeout(() =>{
-      this.setState({isLoading: false});
-    }, 3000);
+// 렌
+  getMovies = async () => {
+    const {
+      data: {
+        data: {movies},
+      },
+    } = await axios.get('https://yts-proxy.now.sh/list_movies.json');
+    this.setState({movies, isLoading: false});
+  }
+
+  componentDidMount(){
+    this.getMovies();
   }
 
   render() {
